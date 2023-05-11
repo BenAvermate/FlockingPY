@@ -47,7 +47,12 @@ class Boid(Sprite):
         return self.limit_force(separation)
 
     def alignment(self, boids):
-        return pygame.Vector2()
+        steering = pygame.Vector2()
+        for boid in boids:
+            steering += boid.velocity
+        steering /= len(boids)
+        steering -= self.velocity
+        return self.limit_force(steering) / 8
 
     def cohesion(self, boids):
         steering = pygame.Vector2()
