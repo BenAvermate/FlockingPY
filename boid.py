@@ -16,9 +16,10 @@ class Boid(Sprite):
         position=pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
         velocity=pygame.math.Vector2((uniform(0, 20), uniform(0, 180))),
         mass=1,
-        max_force=2,
+        max_force=5,
         target_velocity=10,
-        neighborhood_range=100,
+        perception_range=100,
+        neighborhood_range=50,
         neighborhood_angle=120,
     ):
         Boid.set_boundary()
@@ -28,6 +29,7 @@ class Boid(Sprite):
             mass,
             max_force,
             target_velocity,
+            perception_range,
             neighborhood_range,
             neighborhood_angle,
         )
@@ -37,7 +39,12 @@ class Boid(Sprite):
     # TODO: implement flocking rules
     # call limit_force() before returning
     def separation(self, boids):
-        return pygame.Vector2()
+        separation = pygame.Vector2()
+        for boid in boids:
+            distance = self.position.distance_to(boid.position)
+            if distance < self.neighborhood_range:
+                separation += self.position - boid.position
+        return self.limit_force(separation)
 
     def alignment(self, boids):
         return pygame.Vector2()
@@ -79,7 +86,7 @@ class Boid(Sprite):
         for boid in boids:
             if boid != self:
                 distance = self.position.distance_to(boid.position)
-                if distance < self.neighborhood_range:
+                if distance < self.perception_range:
                     neighbors.append(boid)
         return neighbors
 

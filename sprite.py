@@ -19,6 +19,7 @@ class Sprite(pygame.sprite.Sprite):
         mass,
         max_force,
         target_velocity,
+        perception_range,
         neighborhood_range,
         neighborhood_angle,
     ):
@@ -30,6 +31,7 @@ class Sprite(pygame.sprite.Sprite):
         self.mass = mass
         self.max_force = max_force
         self.target_velocity = target_velocity
+        self.perception_range = perception_range
         self.neighborhood_range = neighborhood_range
         self.neighborhood_angle = neighborhood_angle
 
