@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 # TODO: implement noise in velocity
@@ -8,7 +9,8 @@ import pygame
 
 class Sprite(pygame.sprite.Sprite):
     image = pygame.Surface((10, 10), pygame.SRCALPHA)
-    pygame.draw.polygon(image, (255, 255, 255), [(0, 0), (10, 5), (0, 10)], 20)
+    pygame.draw.polygon(image, (255, 255, 255), [(15, 5), (0, 2), (0, 8)])
+    # pygame.draw.circle(image, (255, 255, 255), (5, 5), 50)
 
     def __init__(
         self,
@@ -25,15 +27,13 @@ class Sprite(pygame.sprite.Sprite):
         self.velocity = pygame.Vector2(velocity)
         self.heading = 0.0
         self.bounce = False
-        self.mass = (mass,)
-        self.max_force = (max_force,)
-        self.target_velocity = (target_velocity,)
-        self.neighborhood_range = (neighborhood_range,)
-        self.neighborhood_angle = (neighborhood_angle,)
+        self.mass = mass
+        self.max_force = max_force
+        self.target_velocity = target_velocity
+        self.neighborhood_range = neighborhood_range
+        self.neighborhood_angle = neighborhood_angle
 
         self.rect = self.image.get_rect(center=(self.position.x, self.position.y))
-
-        self.debug = True
 
     def update(self, dt, steering):
         self.acceleration = steering * dt
@@ -57,7 +57,7 @@ class Sprite(pygame.sprite.Sprite):
         else:
             self.wrap()
 
-        self.image = pygame.transform.rotate(Sprite.image, -self.heading)
+        self.image = pygame.transform.rotate(Sprite.image, -new_heading)
 
         if self.debug:
             center = pygame.Vector2((50, 50))

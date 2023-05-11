@@ -22,7 +22,7 @@ class Flock:
             self.boids.append(
                 Boid(
                     pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
-                    pygame.math.Vector2(uniform(-1, 1), uniform(-1, 1)),
+                    pygame.math.Vector2.from_polar((uniform(0, 1), uniform(0, 180))),
                 )
             )
         else:
