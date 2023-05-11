@@ -87,6 +87,7 @@ class Sprite(pygame.sprite.Sprite):
             self.rect = overlay.get_rect(center=self.position)
         else:
             self.rect = self.image.get_rect(center=self.position)
+        print(self)
 
     def wrap(self):
         if self.position.x < 0:

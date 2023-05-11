@@ -7,7 +7,7 @@ from pygame.locals import *
 global world
 
 default_size = {"x": 1000, "y": 1000}
-default_boids = 1
+default_boids = 10
 default_flocks = 1
 
 fps = 30
@@ -91,7 +91,7 @@ def main(args):
     while True:
         update(dt, sprites)
         draw_sprites(screen, background, sprites)
-        dt = clock.tick(fps)
+        dt = clock.tick(fps) / fps
 
 
 if __name__ == "__main__":

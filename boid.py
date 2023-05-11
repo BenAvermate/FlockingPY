@@ -9,15 +9,15 @@ from sprite import Sprite
 
 
 class Boid(Sprite):
-    debug = True
+    debug = False
 
     def __init__(
         self,
         position=pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
-        velocity=pygame.math.Vector2(uniform(-1, 1), uniform(-1, 1)),
+        velocity=pygame.math.Vector2((uniform(0, 20), uniform(0, 180))),
         mass=1,
         max_force=2,
-        target_velocity=5,
+        target_velocity=10,
         neighborhood_range=1,
         neighborhood_angle=120,
     ):
@@ -46,12 +46,12 @@ class Boid(Sprite):
         return
 
     def accelerate(self):
-        diff = self.velocity.as_polar()[0] - self.target_velocity
+        diff = self.target_velocity - self.velocity.as_polar()[0]
         # TODO: toggle for drop off in acceleration
         if math.fabs(diff) > 0.2:
-            return pygame.Vector2(diff * 0.5, self.velocity.as_polar()[1])
+            return pygame.Vector2.from_polar((diff * 0.1, self.velocity.as_polar()[1]))
         else:
-            return pygame.Vector2(0, self.velocity.as_polar()[1])
+            return pygame.Vector2.from_polar((0, self.velocity.as_polar()[1]))
 
     # TODO: implement obstacle avoidance
 
@@ -68,10 +68,10 @@ class Boid(Sprite):
             separation = self.separation(neighbors)
             alignment = self.alignment(neighbors)
             cohesion = self.cohesion(neighbors)
-            acceleration = self.accelerate()
+            steering += separation + alignment + cohesion
 
-            steering += separation + alignment + cohesion + acceleration
-
+        acceleration = self.accelerate()
+        steering += acceleration
         super().update(dt, steering)
 
     def get_neighbors(self, boids):

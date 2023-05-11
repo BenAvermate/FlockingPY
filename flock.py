@@ -22,7 +22,7 @@ class Flock:
             self.boids.append(
                 Boid(
                     pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
-                    pygame.math.Vector2.from_polar((uniform(0, 1), uniform(0, 180))),
+                    pygame.math.Vector2.from_polar((uniform(0, 20), uniform(0, 180))),
                 )
             )
         else:
@@ -31,7 +31,9 @@ class Flock:
     def add_boids(self, sprites: pygame.sprite.Group):
         print("adding boids")
         for boid in self.boids:
-            print(boid)
+            # TODO: implement debug-toggle
+            if boid.debug:
+                print(boid)
             sprites.add(boid)
 
     def update(self, dt, world_size):
