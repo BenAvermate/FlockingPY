@@ -7,6 +7,9 @@ import pygame
 from boid import Boid
 
 # TODO: implement world size
+# TODO: implement flock classes
+# TODO: implement class flocking
+# TODO: implement class flocking toggle
 
 
 class Flock:
