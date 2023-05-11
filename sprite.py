@@ -60,6 +60,8 @@ class Sprite(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(Sprite.image, -new_heading)
 
         if self.debug:
+            print(self)
+
             center = pygame.Vector2((50, 50))
 
             velocity = pygame.Vector2(self.velocity)
@@ -87,7 +89,6 @@ class Sprite(pygame.sprite.Sprite):
             self.rect = overlay.get_rect(center=self.position)
         else:
             self.rect = self.image.get_rect(center=self.position)
-        print(self)
 
     def wrap(self):
         if self.position.x < 0:

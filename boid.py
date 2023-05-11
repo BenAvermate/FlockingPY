@@ -18,7 +18,7 @@ class Boid(Sprite):
         mass=1,
         max_force=2,
         target_velocity=10,
-        neighborhood_range=1,
+        neighborhood_range=100,
         neighborhood_angle=120,
     ):
         Boid.set_boundary()
@@ -37,13 +37,13 @@ class Boid(Sprite):
     # TODO: implement flocking rules
     # call limit_force() before returning
     def separation(self, boids):
-        return
+        return pygame.Vector2()
 
     def alignment(self, boids):
-        return
+        return pygame.Vector2()
 
     def cohesion(self, boids):
-        return
+        return pygame.Vector2()
 
     def accelerate(self):
         diff = self.target_velocity - self.velocity.as_polar()[0]
