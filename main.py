@@ -10,6 +10,8 @@ default_size = {"x": 1000, "y": 1000}
 default_boids = 1
 default_flocks = 1
 
+fps = 30
+
 def generate_world(sprites, flocks=default_flocks, boids=default_boids):
     global world
     world = World(flocks, boids, default_size)
@@ -66,7 +68,6 @@ def update(dt, sprites):
 def main(args):
     pygame.init()
 
-    fps = 60
     clock = pygame.time.Clock()
 
     pygame.display.set_caption("Flocking")

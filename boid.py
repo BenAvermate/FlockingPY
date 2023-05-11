@@ -84,7 +84,7 @@ class Boid(Sprite):
         return neighbors
 
     def __str__(self):
-        return f"Boid at {self.position} with velocity {self.velocity}"
+        return f"Boid at {self.position} with velocity {self.velocity.as_polar()}"
 
     def __eq__(self, other):
         return (
