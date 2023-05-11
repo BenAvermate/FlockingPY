@@ -14,12 +14,12 @@ class Boid(Sprite):
     def __init__(
         self,
         position=pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
-        velocity=pygame.math.Vector2((uniform(0, 20), uniform(0, 180))),
+        velocity=pygame.math.Vector2.from_polar((uniform(0, 20), uniform(0, 180))),
         mass=1,
         max_force=2,
-        target_velocity=10,
-        perception_range=100,
-        neighborhood_range=50,
+        target_velocity=uniform(8, 15),
+        perception_range=70,
+        neighborhood_range=35,
         neighborhood_angle=120,
     ):
         Boid.set_boundary()
@@ -36,8 +36,6 @@ class Boid(Sprite):
         self.rect = self.image.get_rect(center=(self.position.x, self.position.y))
         self.debug = Boid.debug
 
-    # TODO: implement flocking rules
-    # call limit_force() before returning
     def separation(self, boids):
         separation = pygame.Vector2()
         for boid in boids:
@@ -91,6 +89,7 @@ class Boid(Sprite):
         steering += acceleration
         super().update(dt, steering)
 
+    # TODO: implement neighborhood angle
     def get_neighbors(self, boids):
         neighbors = []
         for boid in boids:

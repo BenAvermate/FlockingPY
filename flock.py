@@ -23,6 +23,7 @@ class Flock:
                 Boid(
                     pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
                     pygame.math.Vector2.from_polar((uniform(0, 20), uniform(0, 180))),
+                    target_velocity=uniform(8, 15),
                 )
             )
         else:
