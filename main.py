@@ -12,11 +12,13 @@ default_flocks = 1
 
 fps = 30
 
+
 def generate_world(sprites, flocks=default_flocks, boids=default_boids):
     global world
     world = World(flocks, boids, default_size)
     print(world)
     add_sprites(sprites)
+
 
 def draw_sprites(screen, background, sprites):
     sprites.clear(screen, background)
