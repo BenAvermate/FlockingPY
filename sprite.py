@@ -49,7 +49,7 @@ class Sprite(pygame.sprite.Sprite):
 
         self.velocity.from_polar((speed, new_heading))
 
-        # TODO: implement max speed
+        # TODO: implement max speed (optional)
 
         self.position += self.velocity * dt
 
