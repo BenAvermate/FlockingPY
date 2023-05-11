@@ -1,11 +1,20 @@
 import argparse
 import pygame
+import sys
 from world import World
+from pygame.locals import *
+
+global world
 
 default_size = {"x": 1000, "y": 1000}
 default_boids = 1
 default_flocks = 1
 
+def generate_world(sprites, flocks=default_flocks, boids=default_boids):
+    global world
+    world = World(flocks, boids, default_size)
+    print(world)
+    add_sprites(sprites)
 
 def draw_sprites(screen, background, sprites):
     sprites.clear(screen, background)
@@ -13,11 +22,41 @@ def draw_sprites(screen, background, sprites):
     pygame.display.update(dirty)
 
 
-def add_sprites(sprites, world):
+def add_sprites(sprites):
     world.add_flocks(sprites)
 
 
 def update(dt, sprites):
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit(0)
+        elif event.type == KEYDOWN:
+            mods = pygame.key.get_mods()
+            if event.key == pygame.K_q:
+                # quit
+                pygame.quit()
+                sys.exit(0)
+            elif event.key == pygame.K_UP:
+                # add boids
+                if mods & pygame.KMOD_SHIFT:
+                    add_sprites(sprites, 100)
+                else:
+                    add_sprites(sprites, 10)
+            elif event.key == pygame.K_DOWN:
+                # remove boids
+                if mods & pygame.KMOD_SHIFT:
+                    sprites.remove(sprites.sprites()[:100])
+                else:
+                    sprites.remove(sprites.sprites()[:10])
+            elif event.key == pygame.K_d:
+                # toggle debug
+                for boid in sprites:
+                    boid.debug = not boid.debug
+            elif event.key == pygame.K_r:
+                # reset
+                world.reset()
+
     for sprite in sprites:
         sprite.update(dt, sprites)
 
@@ -39,9 +78,8 @@ def main(args):
 
     sprites = pygame.sprite.RenderUpdates()
 
-    world = World(args.num_flocks, args.num_boids, default_size)
-    add_sprites(sprites, world)
     # FIXME: use the args for spawning boids and flocks
+    generate_world(sprites, args.num_flocks, args.num_boids)
 
     dt = 1 / fps
 
@@ -49,8 +87,6 @@ def main(args):
         update(dt, sprites)
         draw_sprites(screen, background, sprites)
         dt = clock.tick(fps)
-
-    pygame.quit()
 
 
 if __name__ == "__main__":

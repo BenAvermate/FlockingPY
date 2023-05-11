@@ -21,6 +21,7 @@ class World:
             print("Flocks exceeded")
 
     def add_flocks(self, sprites):
+        print("adding flocks")
         for flock in self.flocks:
             flock.add_boids(sprites)
 

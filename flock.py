@@ -28,9 +28,11 @@ class Flock:
         else:
             print("Flock size exceeded")
 
-    def add_boids(self, sprites):
-        for boid in sprites:
-            sprites.add(Boid())
+    def add_boids(self, sprites: pygame.sprite.Group):
+        print("adding boids")
+        for boid in self.boids:
+            print(boid)
+            sprites.add(boid)
 
     def update(self, dt, world_size):
         for boid in self.boids:

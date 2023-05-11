@@ -84,15 +84,17 @@ class Boid(Sprite):
         return neighbors
 
     def __str__(self):
-        return f"Boid at position: ({self.position.x:06.3f}, {self.position.y:06.3f}) with velocity: ({self.velocity.rho:.3f}, {self.velocity.phi: .3f}) and acceleration: ({self.acceleration.rho:.3f}, {self.acceleration.phi: .3f})"
+        return f"Boid at {self.position} with velocity {self.velocity}"
 
     def __eq__(self, other):
         return (
             self.position == other.position
             and self.velocity == other.velocity
-            and self.acceleration == other.acceleration
             and self.mass == other.mass
         )
+
+    def __hash__(self) -> int:
+        return super.__hash__(self)
 
 
 if __name__ == "__main__":
