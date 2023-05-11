@@ -16,7 +16,7 @@ class Boid(Sprite):
         position=pygame.math.Vector2(uniform(0, 1000), uniform(0, 1000)),
         velocity=pygame.math.Vector2((uniform(0, 20), uniform(0, 180))),
         mass=1,
-        max_force=5,
+        max_force=2,
         target_velocity=10,
         perception_range=100,
         neighborhood_range=50,
@@ -50,7 +50,12 @@ class Boid(Sprite):
         return pygame.Vector2()
 
     def cohesion(self, boids):
-        return pygame.Vector2()
+        steering = pygame.Vector2()
+        for boid in boids:
+            steering += boid.position
+            steering /= len(boids)
+            steering -= self.position
+        return self.limit_force(steering) / 100
 
     def accelerate(self):
         diff = self.target_velocity - self.velocity.as_polar()[0]
