@@ -56,6 +56,8 @@ def update(dt, sprites):
             elif event.key == pygame.K_r:
                 # reset
                 world.reset()
+                sprites.empty()
+                add_sprites(sprites)
 
     for sprite in sprites:
         sprite.update(dt, sprites)

@@ -14,7 +14,7 @@ class Flock:
         self.boids = []
         self.flock_size = flock_size
 
-        for i in range(flock_size):
+        for _ in range(flock_size):
             self.new_boid()
 
     def new_boid(self):

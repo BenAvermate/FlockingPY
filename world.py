@@ -9,6 +9,7 @@ class World:
         self.number_of_flocks = number_of_flocks
 
         for i in range(number_of_flocks):
+            print(f"Creating flock {i}")
             self.new_flock(flock_size)
 
     def new_flock(
@@ -21,9 +22,17 @@ class World:
             print("Flocks exceeded")
 
     def add_flocks(self, sprites):
-        print("adding flocks")
         for flock in self.flocks:
             flock.add_boids(sprites)
+
+    def reset(self):
+        print("Resetting world")
+        flocks = len(self.flocks)
+        flock_size = len(self.flocks[0].boids)
+        self.flocks.clear()
+        for i in range(flocks):
+            print(f"Creating flock {i}")
+            self.new_flock(flock_size)
 
     def update(self, dt):
         for flock in self.flocks:
