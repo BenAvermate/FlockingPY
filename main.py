@@ -6,7 +6,7 @@ from pygame.locals import *
 
 global world
 
-default_size = {"x": 1000, "y": 1000}
+default_size = {"x": 1800, "y": 1000}
 default_boids = 50
 default_flocks = 1
 

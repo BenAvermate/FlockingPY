@@ -64,12 +64,24 @@ class Boid(Sprite):
         diff = self.target_velocity - self.velocity.as_polar()[0]
         # TODO: toggle for drop off in acceleration
         if math.fabs(diff) > 0.2:
-            return pygame.Vector2.from_polar((diff * 0.1, self.velocity.as_polar()[1]))
+            return self.limit_force(
+                pygame.Vector2.from_polar((diff * 0.1, self.velocity.as_polar()[1]))
+            )
         else:
             return pygame.Vector2.from_polar((0, self.velocity.as_polar()[1]))
 
     def noise(self):
-        return pygame.Vector2((uniform(-1, 1), uniform(-1, 1)))
+        return (
+            self.limit_force(
+                pygame.Vector2.from_polar(
+                    (
+                        self.velocity.as_polar()[0] / 5,
+                        self.velocity.as_polar()[1] + uniform(-60, 60),
+                    )
+                )
+            )
+            / 2
+        )
 
     # TODO: implement obstacle avoidance
 
