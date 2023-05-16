@@ -2,8 +2,6 @@ import pygame
 import math
 
 
-# TODO: implement noise in velocity
-# TODO: implement noise in acceleration
 # TODO: implement toggle for wall bounce/wrapping
 
 

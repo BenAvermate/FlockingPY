@@ -50,7 +50,7 @@ class Boid(Sprite):
             steering += boid.velocity
         steering /= len(boids)
         steering -= self.velocity
-        return self.limit_force(steering) / 8
+        return self.limit_force(steering) / 10
 
     def cohesion(self, boids):
         steering = pygame.Vector2()
@@ -67,6 +67,9 @@ class Boid(Sprite):
             return pygame.Vector2.from_polar((diff * 0.1, self.velocity.as_polar()[1]))
         else:
             return pygame.Vector2.from_polar((0, self.velocity.as_polar()[1]))
+
+    def noise(self):
+        return pygame.Vector2((uniform(-1, 1), uniform(-1, 1)))
 
     # TODO: implement obstacle avoidance
 
@@ -86,7 +89,8 @@ class Boid(Sprite):
             steering += separation + alignment + cohesion
 
         acceleration = self.accelerate()
-        steering += acceleration
+        noise = self.noise()
+        steering += acceleration + noise
         super().update(dt, steering)
 
     # TODO: implement neighborhood angle
