@@ -41,20 +41,20 @@ def update(dt, sprites):
                 # quit
                 pygame.quit()
                 sys.exit(0)
-            elif event.key == pygame.K_UP:
-                # add boids
-                if mods & pygame.KMOD_SHIFT:
-                    add_sprites(sprites, 100)
-                else:
-                    add_sprites(sprites, 10)
-            elif event.key == pygame.K_DOWN:
-                # remove boids
-                if mods & pygame.KMOD_SHIFT:
-                    sprites.remove(sprites.sprites()[:100])
-                else:
-                    sprites.remove(sprites.sprites()[:10])
+            # elif event.key == pygame.K_UP:
+            #     # TODO: add boids
+            #     if mods & pygame.KMOD_SHIFT:
+            #         add_sprites(sprites, 100)
+            #     else:
+            #         add_sprites(sprites, 10)
+            # elif event.key == pygame.K_DOWN:
+            #     # TODO: remove boids
+            #     if mods & pygame.KMOD_SHIFT:
+            #         sprites.remove(sprites.sprites()[:100])
+            #     else:
+            #         sprites.remove(sprites.sprites()[:10])
             elif event.key == pygame.K_d:
-                # toggle debug
+                # TODO: toggle debug deeper implementation
                 for boid in sprites:
                     boid.debug = not boid.debug
             elif event.key == pygame.K_r:
