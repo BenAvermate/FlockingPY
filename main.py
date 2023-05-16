@@ -7,7 +7,7 @@ from pygame.locals import *
 global world
 
 default_size = {"x": 1000, "y": 1000}
-default_boids = 30
+default_boids = 50
 default_flocks = 1
 
 fps = 30

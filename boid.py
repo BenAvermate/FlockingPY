@@ -19,7 +19,7 @@ class Boid(Sprite):
         max_force=2,
         target_velocity=uniform(8, 15),
         perception_range=70,
-        neighborhood_range=35,
+        neighborhood_range=25,
         neighborhood_angle=120,
     ):
         Boid.set_boundary()
